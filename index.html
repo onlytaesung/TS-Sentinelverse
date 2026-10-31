@@ -520,13 +520,15 @@ function renderTest(){
 
 function show(v){
   ["center","cards","test"].forEach(k=>{$("#v-"+k).hidden=k!==v;$("#t-"+k).setAttribute("aria-selected",k===v);});
-  if(location.hash!=="#"+v)history.replaceState(null,"","#"+v);
+  if(location.hash)history.replaceState(null,"",location.pathname+location.search);
   window.scrollTo({top:0});
 }
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>show(t.dataset.v));
-window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(["center","cards","test"].includes(h))show(h);});
 renderCenter();renderCards();renderTest();
-const h0=location.hash.slice(1);show(["center","cards","test"].includes(h0)?h0:"center");
+/* 다시 들어오면 항상 처음(접속 화면 → 센터)부터 */
+try{if("scrollRestoration" in history)history.scrollRestoration="manual";}catch(e){}
+show("center");
+window.addEventListener("pageshow",e=>{if(e.persisted)location.reload();});
 
 
 /* 20초 뒤 신규 가이드 성호 등록 */
