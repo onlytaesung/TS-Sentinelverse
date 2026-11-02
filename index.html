@@ -1,4 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
 <title>대한민국센티널관리본부</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -310,7 +311,7 @@ const TAESAN_TESTS=[
  {id:"seongho",rate:null,verdict:"검사 예정"}
 ];
 /* 날짜는 페이지를 연 날 기준 */
-const NOW=new Date();
+const NOW=new Date(2026,9,4,9,15);  /* 최근 기록 기준일 고정: 2026.10.04 */
 const p2=n=>String(n).padStart(2,"0");
 const dt=(off,hm)=>{const d=new Date(NOW);d.setDate(d.getDate()+off);return `${p2(d.getMonth()+1)}.${p2(d.getDate())} ${hm}`;};
 const TODAY_FULL=`${NOW.getFullYear()}.${p2(NOW.getMonth()+1)}.${p2(NOW.getDate())}`;
@@ -324,7 +325,7 @@ const LOG=[
  [dt(-6,"11:00"),"태산, 센터 소속 가이드 전원과 매칭 부적합 판정"]
 ];
 const byId=id=>AGENTS.find(a=>a.id===id);
-let ARRIVED=true,ARRIVE_TIME=dt(0,`${p2(NOW.getHours())}:${p2(NOW.getMinutes())}`);
+let ARRIVED=true,ARRIVE_TIME=dt(0,"09:15");
 const live=()=>AGENTS.filter(a=>a.id!=="seongho"||ARRIVED);
 const roleTxt=r=>r==="s"?"센티넬":"가이드";
 const $=s=>document.querySelector(s);
@@ -639,5 +640,6 @@ $("#g-btn").onclick=async()=>{
   }catch(e){}
 })();
 </script>
+
 
 </body></html>
